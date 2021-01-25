@@ -68,6 +68,7 @@ namespace AlyaDiscord
             this.Commands.CommandErrored += this.Commands_CommandErrored;
             this.Commands.RegisterCommands<dialogCommands>();
             this.Commands.RegisterCommands<CideCommands>();
+            this.Commands.RegisterCommands<SCCTicketCommands>();
             await this.Client.ConnectAsync();
             await CideTimerOnStartup.LoadAsync(this.Client);
             await Task.Delay(-1);

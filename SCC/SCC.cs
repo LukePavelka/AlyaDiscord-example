@@ -59,5 +59,14 @@ class SCC
         }
     }
 
+    public async Task<dynamic> deleteStreamAsync(string wsident)
+    {
+        //hidden, contains sensitive data
+    }
 
+    public async Task<dynamic> deleteMediaAsync(string type,string service, string serviceID)
+    {
+        //hidden, contains sensitive data
+    }
+    
 }
