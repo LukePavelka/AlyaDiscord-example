@@ -64,10 +64,8 @@ namespace AlyaDiscord.TicketRemoveAdminRoot
         public async System.Threading.Tasks.Task FeedbackToAdminAsync(DSharpPlus.CommandsNext.CommandContext ctx, DiscordEmbedBuilder emb)
         {
             emb.AddField("Žadatel",DiscordUserName);
-            //hidden, contains sensitive data
-            var guild = await ctx.Client.GetGuildAsync(00000000000000000);
-            //hidden, contains sensitive data
-            var personArwwarr = await guild.GetMemberAsync(0000000000000000);
+            var guild = await ctx.Client.GetGuildAsync(12345678912345);
+            var personArwwarr = await guild.GetMemberAsync(12345678912345);
             await personArwwarr.SendMessageAsync(embed: emb);
         }
 

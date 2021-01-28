@@ -1,14 +1,8 @@
 using System;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using DSharpPlus;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
-using DSharpPlus.Interactivity;
-using RestSharp;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using AlyaDiscord.Cide;
 

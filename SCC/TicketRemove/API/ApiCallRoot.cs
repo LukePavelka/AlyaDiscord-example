@@ -1,9 +1,4 @@
-using System;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
 using RestSharp;
-using Newtonsoft.Json;
 using System.Net;
 
 namespace AlyaDiscord.TicketRemoveAPICall
@@ -27,7 +22,6 @@ namespace AlyaDiscord.TicketRemoveAPICall
             {
                 return "error";
             }
-
         }
         static public dynamic put(string json, string id)
         {
@@ -46,7 +40,6 @@ namespace AlyaDiscord.TicketRemoveAPICall
             {
                 return "error";
             }
-
         }
         static public dynamic delete(string id)
         {
@@ -79,7 +72,6 @@ namespace AlyaDiscord.TicketRemoveAPICall
             {
                 return "error";
             }
-            
         }
         static public dynamic getall()
         {
@@ -97,6 +89,5 @@ namespace AlyaDiscord.TicketRemoveAPICall
                 return "error";
             }
         }
-
     }
 }

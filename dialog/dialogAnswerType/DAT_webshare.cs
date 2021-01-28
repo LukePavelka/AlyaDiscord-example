@@ -1,69 +1,37 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using DSharpPlus;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
-using DSharpPlus.Entities;
-using DSharpPlus.Interactivity;
 
 namespace AlyaDiscord
 {
-    public class DatWebshareUrlID
+    public class DatWebshareUrlID : DatBase
     {
-        public List<DialogData> rootList;
-        public string input;
-        public int index;
-        public List<string> outputvar;
-        public dynamic StatusReportMessageID;
-        public dynamic DialogMessageID;
-        public CommandContext ctx;
-        public DatWebshareUrlID(List<DialogData> rootList)
-        {
-            this.rootList = rootList;
-        }
+        public DatWebshareUrlID(List<DialogData> rootList) : base(rootList){}
 
-        private void processing()
+        protected override string processingInternalAsync(string input)
         {
-            if (input != null)
+            string[] lines = input.Split(
+                new[] { "\r\n", "\r", "\n", " " },
+                StringSplitOptions.None
+            );
+            lines.ToList();
+            outputvar = new List<string>();
+            Regex r = new Regex(@"(?<=file/)[a-zA-Z0-9]+", RegexOptions.Compiled);
+            foreach (var item in lines)
             {
-                string[] lines = input.Split(
-                    new[] { "\r\n", "\r", "\n", " " },
-                    StringSplitOptions.None
-                );
-                lines.ToList();
-                outputvar = new List<string>();
-                Regex r = new Regex(@"(?<=file/)[a-zA-Z0-9]+", RegexOptions.Compiled);
-
-                foreach (var item in lines)
+                if (item.Contains("/"))
                 {
-                    if (item.Contains("/"))
-                    {
-                        Match match = r.Match(item);
-                        outputvar.Add(match.Value);
-                    }
-                    else
-                    {
-                        outputvar.Add(item);
-                    }
-                    
+                    Match match = r.Match(item);
+                    outputvar.Add(match.Value);
                 }
-
-                
+                else
+                {
+                    outputvar.Add(item);
+                }
             }
+            // maybe return none
+            return input;
         }
-
-        public async Task<dynamic> output()
-        {
-            await Task.FromResult(0);
-            processing();
-            return "";
-        }
-
-        
-
     }
 }

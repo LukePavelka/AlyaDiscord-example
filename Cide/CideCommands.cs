@@ -3,9 +3,7 @@ using System.Threading.Tasks;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.IO;
-using System;
 
 namespace AlyaDiscord
 {

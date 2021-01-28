@@ -1,37 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using DSharpPlus;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
-using DSharpPlus.Entities;
-using DSharpPlus.Interactivity;
 using Newtonsoft.Json;
 
 namespace AlyaDiscord
 {
-    public class DATSccSearchnext
+    public class DATSccSearchnext : DatBaseAsync
     {
-        public List<DialogData> rootList; // base list for dialogs
-        public List<DATSccSearchData> searchList; /// search data
+        public List<DATSccSearchData> searchList;
         private DATSccSearchData selected;
-        public string input; // way how add input to this class
-        public int index; // index of list
-        public DiscordMessage StatusReportMessageID; // Status message id
-        public DiscordMessage DialogMessageID; // dialog message id
-        public CommandContext ctx;
 
-        public DATSccSearchnext(List<DialogData> rootList)
-        {
-            this.rootList = rootList;
-        }
+        public DATSccSearchnext(List<DialogData> rootList) : base(rootList){}
 
-
-        private async Task<string> processingAsync()
+        protected override async Task<string> processingInternalAsync(string input)
         {
             if (input != null)
             {
@@ -66,7 +49,6 @@ namespace AlyaDiscord
                         if (SeasonCheck.Contains(true))
                         {
                             List<DATSccSearchData> EpisodesInternalProcessing = new List<DATSccSearchData>();
-                            // uvnitř jsou jen sezony
                             foreach (var obsahSezon in sccParentObject.Data)
                             {
                                 var SeasonInfo = await SCC.GetInfoParentAsync(obsahSezon.Id);
@@ -92,9 +74,7 @@ namespace AlyaDiscord
                                     }
                                 }
                             }
-                            // mame list s jednotlivimy dily
-                            // ted z neho ziskame všechny ws id
-                            // a uložime
+
                             foreach (var jednotlivedily in EpisodesInternalProcessing)
                             {
                                 await jednotlivedily.getStreamsAsync();
@@ -211,9 +191,7 @@ namespace AlyaDiscord
                             byte[] byteArray = Encoding.ASCII.GetBytes( output );
                             MemoryStream stream = new MemoryStream( byteArray );
                             await StatusReportMessageID.RespondWithFileAsync(stream,"result_movie.json",content:ctx.User.Mention);
-                        }
-                        
-                        
+                        }           
                     }
                 }
                return selected.name;
@@ -221,10 +199,5 @@ namespace AlyaDiscord
             return null;
         }
 
-        public async Task<dynamic> output()
-        {
-            //processing();
-            return await processingAsync();
-        }
     }
 }

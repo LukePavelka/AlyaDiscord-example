@@ -5,7 +5,7 @@ using DSharpPlus.Entities;
 
 namespace AlyaDiscord
 {
-    abstract public class DatBase : IDatBase
+    abstract public class DatBaseAsync : IDatBase
     {
         public List<DialogData> rootList { get; set; }
         public string input { get; set; }
@@ -15,24 +15,22 @@ namespace AlyaDiscord
         public DiscordMessage DialogMessageID { get; set; } 
         public CommandContext ctx { get; set; }
 
-        public DatBase(List<DialogData> rootList)
+        public DatBaseAsync(List<DialogData> rootList)
         {
             this.rootList = rootList;
         }
-        protected abstract string processingInternalAsync(string input);
-
-        internal string processing()
+        protected abstract Task<string> processingInternalAsync(string input);
+        internal async Task<string> processingAsync()
         {
             if (input != null)
             {
-                return processingInternalAsync(input);
+                return await processingInternalAsync(input);
             }
             return null;
         }
         public virtual async Task<dynamic> output()
         {
-            await Task.FromResult(0);
-            return processing();
+            return await processingAsync();
         }
     }
 }

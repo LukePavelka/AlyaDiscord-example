@@ -1,17 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
-using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
-using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
 using Newtonsoft.Json;
-
-
 
 namespace AlyaDiscord
 {
@@ -123,7 +116,6 @@ namespace AlyaDiscord
                 TicketRemoveRoot.Reason = Result[3].Answer;
                 var json = JsonConvert.SerializeObject(TicketRemoveRoot);
                 AlyaDiscord.TicketRemoveAPICall.requestRoot.post(json);
-
             }  
         }
         [Command("scc_remove_ticket_ticket"), Description("Vše smazat."),Hidden,RequireOwner]
